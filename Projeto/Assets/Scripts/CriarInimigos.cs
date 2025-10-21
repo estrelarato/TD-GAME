@@ -1,36 +1,24 @@
 using UnityEngine;
 
-public class CriarInimigos : MonoBehaviour
+public class Criarinimigos : MonoBehaviour
 {
-   
-    public GameObject[] inimigos; 
-    public Transform[] posicaoDosInimigos;
-    
-    public float tempoDoNovoInimigo = 15; //segundos
-    
-    private float cronometroInimigo = 0;
-    
-    
-    
+    public GameObject[] tiposDeInimigos; // arraste 3 prefabs diferentes
+    public Transform[] pontosDeSpawn;    // posições específicas no mapa
+    public float intervalo = 3f;
+
     void Start()
     {
-        
+        InvokeRepeating(nameof(GerarInimigo), 2f, intervalo);
     }
 
-    
-    void Update()
+    void GerarInimigo()
     {
-        cronometroInimigo += Time.deltaTime;
+        if (pontosDeSpawn.Length == 0 || tiposDeInimigos.Length == 0)
+            return;
 
-        if (cronometroInimigo >= tempoDoNovoInimigo)
-        {
-            Transform posicao = posicaoDosInimigos[Random.Range(0, posicaoDosInimigos.Length)];
-           
-            GameObject inimigo = Instantiate( 
-                inimigos[Random.Range(0, inimigos.Length)], 
-                posicao) as GameObject;
-            
-            cronometroInimigo = 0;
-        }
+        Transform ponto = pontosDeSpawn[Random.Range(0, pontosDeSpawn.Length)];
+        GameObject prefab = tiposDeInimigos[Random.Range(0, tiposDeInimigos.Length)];
+
+        Instantiate(prefab, ponto.position, Quaternion.identity);
     }
 }

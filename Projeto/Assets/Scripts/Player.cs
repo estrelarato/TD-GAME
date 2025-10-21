@@ -1,67 +1,65 @@
 using UnityEngine;
+using UnityEngine.UI;
 
-public class Player : Personagem
+public class Player : MonoBehaviour
 {
-    private SpriteRenderer spriteRenderer;
-    private Animator animator;
-    
-    public Transform arma;
+    public float velocidade = 5f;
+    public int vidaMaxima = 100;
+    public int vidaAtual;
+    public int pontuacao;
 
-    private bool amdando;
-    
-   void Start()
+    public Slider barraVidaUI;
+    public TMPro.TextMeshProUGUI textoPontuacao;
+
+    private Rigidbody2D rb;
+    private Vector2 direcao;
+
+    void Start()
     {
-        spriteRenderer = GetComponent<SpriteRenderer>();
-        animator = GetComponent<Animator>();
+        rb = GetComponent<Rigidbody2D>();
+        vidaAtual = vidaMaxima;
+        AtualizarHUD();
     }
-  void Update()
+
+    void Update()
     {
-        amdando = false;
-        
-        //direita
-        if (arma.rotation.eulerAngles.z > -90 
-            && arma.rotation.eulerAngles.z < 90)
-        {
-            spriteRenderer.flipX = false;
-        }
-        
-        //esquerda
-        if (arma.rotation.eulerAngles.z > 90 
-            && arma.rotation.eulerAngles.z < 270)
-        {
-            spriteRenderer.flipX = true;
-        }
+        // Entrada de movimento
+        float moveX = Input.GetAxisRaw("Horizontal");
+        float moveY = Input.GetAxisRaw("Vertical");
+        direcao = new Vector2(moveX, moveY).normalized;
 
+        // Atualiza HUD
+        AtualizarHUD();
+    }
 
+    void FixedUpdate()
+    {
+        rb.MovePosition(rb.position + direcao * velocidade * Time.fixedDeltaTime);
+    }
 
-        //movimento para a esquerda
-        if (Input.GetKey(KeyCode.A))
+    public void LevarDano(int dano)
+    {
+        vidaAtual -= dano;
+        if (vidaAtual <= 0)
         {
-          transform.position -= new Vector3(getVelocidade() * Time.deltaTime, 0, 0);  
-          amdando = true;
+            vidaAtual = 0;
+            // Aqui você pode chamar uma tela de Game Over
         }
+        AtualizarHUD();
+    }
 
-        //movimento para a direita
-        if (Input.GetKey(KeyCode.D))
-        {
-            transform.position += new Vector3(getVelocidade() * Time.deltaTime, 0, 0);
-            amdando = true;
-        }
-        
-        //movimento para a Cima
-        if (Input.GetKey(KeyCode.W))
-        {
-            transform.position += new Vector3(0, getVelocidade() * Time.deltaTime, 0); 
-            amdando = true;
-        }
-        
-        //movimento para a Cima
-        if (Input.GetKey(KeyCode.S))
-        {
-            transform.position -= new Vector3(0, getVelocidade() * Time.deltaTime, 0);  
-            amdando = true;
-        }
-        
-        animator.SetBool("Andando", amdando);
+    public void AdicionarPontuacao(int pontos)
+    {
+        pontuacao += pontos;
+        AtualizarHUD();
+    }
+
+    void AtualizarHUD()
+    {
+        if (barraVidaUI != null)
+            barraVidaUI.value = (float)vidaAtual / vidaMaxima;
+
+        if (textoPontuacao != null)
+            textoPontuacao.text = $"Pontos: {pontuacao}";
     }
 }
