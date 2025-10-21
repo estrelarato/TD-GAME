@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 520962301015195945}
   - component: {fileID: 5929069751171378759}
   m_Layer: 0
-  m_Name: inimigo
+  m_Name: inimigo 2
   m_TagString: Inimigo
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -29,8 +29,8 @@ Transform:
   m_GameObject: {fileID: 8833685613907424030}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 2.7508945, y: 2.3969045, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalPosition: {x: 2.6258, y: 2.2706, z: 0}
+  m_LocalScale: {x: 0.7497188, y: 0.74731964, z: 0.7997}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
@@ -79,12 +79,12 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: -2733972724015051371, guid: c1e7e34d9c89e1041a79e0401c70cccf, type: 3}
+  m_Sprite: {fileID: -3961576793166011331, guid: 1e359326fb9368942b771cc4d72fe4f3, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 4.89, y: 3.73}
+  m_Size: {x: 1, y: 1}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
@@ -165,8 +165,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cf8b6462d394a7940b22447849f9806f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  velocidade: 5
-  vidaMaxima: 3
+  velocidade: 7
+  vidaMaxima: 2
   vidaAtual: 5
   pontosAoMorrer: 10
   barraVida: {fileID: 0}

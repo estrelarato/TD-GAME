@@ -22,10 +22,16 @@ public class Inimigo : MonoBehaviour
     {
         if (player != null)
         {
+            // Movimento
             Vector2 direcao = (player.position - transform.position).normalized;
             transform.position += (Vector3)direcao * velocidade * Time.deltaTime;
+
+            // Rotação para olhar na direção do movimento
+            float angulo = Mathf.Atan2(direcao.y, direcao.x) * Mathf.Rad2Deg;
+            transform.rotation = Quaternion.Euler(0, 0, angulo - 90f); // ajuste -90 se o sprite aponta para cima
         }
 
+        // Atualiza barra de vida
         if (barraVida != null)
             barraVida.value = (float)vidaAtual / vidaMaxima;
     }
