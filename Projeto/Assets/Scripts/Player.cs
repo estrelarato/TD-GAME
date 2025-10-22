@@ -23,12 +23,9 @@ public class Player : MonoBehaviour
 
     void Update()
     {
-        // Entrada de movimento
         float moveX = Input.GetAxisRaw("Horizontal");
         float moveY = Input.GetAxisRaw("Vertical");
         direcao = new Vector2(moveX, moveY).normalized;
-
-        // Atualiza HUD
         AtualizarHUD();
     }
 
@@ -43,9 +40,18 @@ public class Player : MonoBehaviour
         if (vidaAtual <= 0)
         {
             vidaAtual = 0;
-            // Aqui você pode chamar uma tela de Game Over
+            AtualizarHUD();
+            Morrer();
+            return;
         }
+
         AtualizarHUD();
+    }
+
+    void Morrer()
+    {
+        // Aqui você pode adicionar animação ou efeitos antes de destruir
+        Destroy(gameObject);
     }
 
     public void AdicionarPontuacao(int pontos)

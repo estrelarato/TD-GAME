@@ -6,52 +6,60 @@ public class Inimigo : MonoBehaviour
     public float velocidade = 2f;
     public int vidaMaxima = 50;
     public int vidaAtual;
+    public int dano = 10; // << Dano ajustável pelo Inspector
     public int pontosAoMorrer = 10;
 
     public Slider barraVida;
-    public Transform corpo; // novo campo: o sprite que vai girar
+    public Transform corpo;
 
     private Transform player;
 
     void Start()
     {
         vidaAtual = vidaMaxima;
-        player = GameObject.FindGameObjectWithTag("Player").transform;
+        player = GameObject.FindGameObjectWithTag("Player")?.transform;
     }
 
     void Update()
     {
         if (player != null)
         {
-            // Movimento
             Vector2 direcao = (player.position - transform.position).normalized;
             transform.position += (Vector3)direcao * velocidade * Time.deltaTime;
 
-            // Rotação aplicada só ao "corpo"
             float angulo = Mathf.Atan2(direcao.y, direcao.x) * Mathf.Rad2Deg;
-            corpo.rotation = Quaternion.Euler(0, 0, angulo - 90f);
+            if (corpo != null)
+                corpo.rotation = Quaternion.Euler(0, 0, angulo - 90f);
         }
 
-        // Atualiza barra de vida
         if (barraVida != null)
             barraVida.value = (float)vidaAtual / vidaMaxima;
     }
 
-    void OnCollisionEnter2D(Collision2D colisao)
+    void OnTriggerEnter2D(Collider2D outro)
     {
-        if (colisao.gameObject.CompareTag("Player"))
+        if (outro.CompareTag("Player"))
         {
-            colisao.gameObject.GetComponent<Player>().LevarDano(10);
+            Player p = outro.GetComponent<Player>();
+            if (p != null)
+                p.LevarDano(dano);
         }
     }
 
-    public void LevarDano(int dano)
+    public void LevarDano(int danoRecebido)
     {
-        vidaAtual -= dano;
+        vidaAtual -= danoRecebido;
 
         if (vidaAtual <= 0)
         {
-            player.GetComponent<Player>().AdicionarPontuacao(pontosAoMorrer);
+            vidaAtual = 0;
+            if (player != null)
+            {
+                Player p = player.GetComponent<Player>();
+                if (p != null)
+                    p.AdicionarPontuacao(pontosAoMorrer);
+            }
+
             Destroy(gameObject);
         }
     }

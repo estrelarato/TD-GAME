@@ -123,6 +123,7 @@ MonoBehaviour:
   velocidade: 7
   vidaMaxima: 2
   vidaAtual: 2
+  dano: 1
   pontosAoMorrer: 5
   barraVida: {fileID: 1282357777655813162}
   corpo: {fileID: 611693474837176498}
@@ -152,7 +153,7 @@ Rigidbody2D:
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
-  m_Constraints: 0
+  m_Constraints: 4
 --- !u!58 &702759304787661126
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -183,7 +184,7 @@ CircleCollider2D:
   m_CallbackLayers:
     serializedVersion: 2
     m_Bits: 4294967295
-  m_IsTrigger: 1
+  m_IsTrigger: 0
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0
