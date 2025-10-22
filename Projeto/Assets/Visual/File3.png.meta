@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: 8ff9154078b21654a89c51ce7155367d
+guid: 1ee0662f1b639734e9cf50f2482123d1
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -4385680264060858364
-    second: "Carapa\xE7a-Roli\xE7a_0"
+      213: -1429139636971084480
+    second: File3_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -37,7 +37,7 @@ TextureImporter:
   maxTextureSize: 2048
   textureSettings:
     serializedVersion: 2
-    filterMode: 0
+    filterMode: 1
     aniso: 1
     mipBias: 0
     wrapU: 1
@@ -100,13 +100,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: "Carapa\xE7a-Roli\xE7a_0"
+      name: File3_0
       rect:
         serializedVersion: 2
-        x: 9
-        y: 1
-        width: 133
-        height: 127
+        x: 27
+        y: 100
+        width: 326
+        height: 71
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -115,8 +115,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 4001632490fe223c0800000000000000
-      internalID: -4385680264060858364
+      spriteID: 04568e3721daa2ce0800000000000000
+      internalID: -1429139636971084480
       vertices: []
       indices: 
       edges: []
@@ -134,8 +134,7 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable:
-      "Carapa\xE7a-Roli\xE7a_0": -4385680264060858364
+    nameFileIdTable: {}
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

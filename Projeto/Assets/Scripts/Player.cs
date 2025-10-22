@@ -60,6 +60,6 @@ public class Player : MonoBehaviour
             barraVidaUI.value = (float)vidaAtual / vidaMaxima;
 
         if (textoPontuacao != null)
-            textoPontuacao.text = $"Pontos: {pontuacao}";
+            textoPontuacao.text = $"{pontuacao}";
     }
 }

@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: 8ff9154078b21654a89c51ce7155367d
+guid: c75844fdcf95f204a846b477b6491cad
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -4385680264060858364
-    second: "Carapa\xE7a-Roli\xE7a_0"
+      213: -3063076906918883688
+    second: PontosIcon_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -100,13 +100,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: "Carapa\xE7a-Roli\xE7a_0"
+      name: PontosIcon_0
       rect:
         serializedVersion: 2
-        x: 9
-        y: 1
-        width: 133
-        height: 127
+        x: 7
+        y: 4
+        width: 129
+        height: 131
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -115,8 +115,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 4001632490fe223c0800000000000000
-      internalID: -4385680264060858364
+      spriteID: 89ec56338c3cd75d0800000000000000
+      internalID: -3063076906918883688
       vertices: []
       indices: 
       edges: []
@@ -135,7 +135,7 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      "Carapa\xE7a-Roli\xE7a_0": -4385680264060858364
+      PontosIcon_0: -3063076906918883688
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

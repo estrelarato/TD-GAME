@@ -9,6 +9,7 @@ public class Inimigo : MonoBehaviour
     public int pontosAoMorrer = 10;
 
     public Slider barraVida;
+    public Transform corpo; // novo campo: o sprite que vai girar
 
     private Transform player;
 
@@ -26,14 +27,22 @@ public class Inimigo : MonoBehaviour
             Vector2 direcao = (player.position - transform.position).normalized;
             transform.position += (Vector3)direcao * velocidade * Time.deltaTime;
 
-            // Rotação para olhar na direção do movimento
+            // Rotação aplicada só ao "corpo"
             float angulo = Mathf.Atan2(direcao.y, direcao.x) * Mathf.Rad2Deg;
-            transform.rotation = Quaternion.Euler(0, 0, angulo - 90f); // ajuste -90 se o sprite aponta para cima
+            corpo.rotation = Quaternion.Euler(0, 0, angulo - 90f);
         }
 
         // Atualiza barra de vida
         if (barraVida != null)
             barraVida.value = (float)vidaAtual / vidaMaxima;
+    }
+
+    void OnCollisionEnter2D(Collision2D colisao)
+    {
+        if (colisao.gameObject.CompareTag("Player"))
+        {
+            colisao.gameObject.GetComponent<Player>().LevarDano(10);
+        }
     }
 
     public void LevarDano(int dano)

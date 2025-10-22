@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 5395286656722852798}
   - component: {fileID: 2232270742103308773}
   - component: {fileID: 987047946519500798}
+  - component: {fileID: 1453470849365207551}
   m_Layer: 0
   m_Name: bala
   m_TagString: Untagged
@@ -79,12 +80,12 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: -2413806693520163455, guid: ebe73ca9363db456bacf42c025bb4847, type: 3}
-  m_Color: {r: 1, g: 0.836574, b: 0, a: 1}
+  m_Sprite: {fileID: -3660571561243988826, guid: ff6d902528fd02040b2a79760292b153, type: 3}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 1, y: 1}
+  m_Size: {x: 4.78, y: 1.64}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
@@ -103,7 +104,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   dano: 1
-  tempoDeVida: 3
+  tempoDeVida: 0.6
 --- !u!70 &2232270742103308773
 CapsuleCollider2D:
   m_ObjectHideFlags: 0
@@ -168,3 +169,23 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
+--- !u!114 &1453470849365207551
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7576731785126797654}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 251b04d59a94c2e4fadb4f6329654033, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  frames:
+  - {fileID: -3660571561243988826, guid: ff6d902528fd02040b2a79760292b153, type: 3}
+  - {fileID: 1373310290039150802, guid: 9d664e2866585d940883cce1756d50e6, type: 3}
+  - {fileID: -1429139636971084480, guid: 1ee0662f1b639734e9cf50f2482123d1, type: 3}
+  - {fileID: 4559543775301443952, guid: d52eb1cabf31bd44e8d95a8abb72dddf, type: 3}
+  - {fileID: 1239187260319366027, guid: ce47229eb493d5241b37879edde3de54, type: 3}
+  - {fileID: -6261941741821298692, guid: 5b1333a0972e1944e98785791b1fcae3, type: 3}
+  tempoPorFrame: 0.1
