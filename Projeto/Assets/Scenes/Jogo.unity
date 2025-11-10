@@ -586,6 +586,18 @@ PrefabInstance:
       propertyPath: m_AnchorMax.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3173760512248453215, guid: 0e462a9b260041546b5aa552dec8fb5e, type: 3}
+      propertyPath: anguloGolpe
+      value: 20
+      objectReference: {fileID: 0}
+    - target: {fileID: 3173760512248453215, guid: 0e462a9b260041546b5aa552dec8fb5e, type: 3}
+      propertyPath: "duracaoBalan\xE7o"
+      value: 0.2
+      objectReference: {fileID: 0}
+    - target: {fileID: 3173760512248453215, guid: 0e462a9b260041546b5aa552dec8fb5e, type: 3}
+      propertyPath: "intensidadeBalan\xE7o"
+      value: 30
+      objectReference: {fileID: 0}
     - target: {fileID: 4218837269235541117, guid: 0e462a9b260041546b5aa552dec8fb5e, type: 3}
       propertyPath: m_Mass
       value: 0.0001
