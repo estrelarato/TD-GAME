@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: 92ba10bce9dca2842935e2c83b469aa8
+guid: 712c02bd4a9b7824e802cc31ac18b271
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 2750217869760104745
-    second: "ferr\xE3o_0"
+      213: 7285104100621103090
+    second: fundo_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -37,7 +37,7 @@ TextureImporter:
   maxTextureSize: 2048
   textureSettings:
     serializedVersion: 2
-    filterMode: 0
+    filterMode: 1
     aniso: 1
     mipBias: 0
     wrapU: 1
@@ -51,7 +51,7 @@ TextureImporter:
   spriteMeshType: 1
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
-  spritePixelsToUnits: 16
+  spritePixelsToUnits: 100
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spriteGenerateFallbackPhysicsShape: 1
   alphaUsage: 1
@@ -126,13 +126,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: "ferr\xE3o_0"
+      name: fundo_0
       rect:
         serializedVersion: 2
         x: 0
-        y: 3
-        width: 80
-        height: 355
+        y: 0
+        width: 724
+        height: 394
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -141,8 +141,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 9298bfdc49cba2620800000000000000
-      internalID: 2750217869760104745
+      spriteID: 2ff2345d493e91560800000000000000
+      internalID: 7285104100621103090
       vertices: []
       indices: 
       edges: []
@@ -160,8 +160,7 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable:
-      "ferr\xE3o_0": 2750217869760104745
+    nameFileIdTable: {}
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

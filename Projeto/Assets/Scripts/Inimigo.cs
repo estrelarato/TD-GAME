@@ -6,7 +6,7 @@ public class Inimigo : MonoBehaviour
     public float velocidade = 2f;
     public int vidaMaxima = 50;
     public int vidaAtual;
-    public int dano = 10; // << Dano ajustável pelo Inspector
+    public int dano = 10; // Dano ajustável pelo Inspector
     public int pontosAoMorrer = 10;
 
     public Slider barraVida;
@@ -43,8 +43,19 @@ public class Inimigo : MonoBehaviour
             Player p = outro.GetComponent<Player>();
             if (p != null)
                 p.LevarDano(dano);
+
+            // 🧨 Faz o inimigo morrer ao causar o primeiro dano
+            if (player != null)
+            {
+                Player playerScript = player.GetComponent<Player>();
+                if (playerScript != null)
+                    playerScript.AdicionarPontuacao(pontosAoMorrer);
+            }
+
+            Destroy(gameObject);
         }
     }
+
 
     public void LevarDano(int danoRecebido)
     {
