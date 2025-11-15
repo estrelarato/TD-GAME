@@ -721,6 +721,8 @@ MonoBehaviour:
   balaPrefab: {fileID: 7576731785126797654, guid: 218cfa3def23d6f4fa0ad9db48f54edc, type: 3}
   intervaloDeDisparo: 0.5
   velocidadeBala: 10
+  "intensidadeBalan\xE7o": 20
+  "duracaoBalan\xE7o": 0.1
 --- !u!1 &5416348856607688515
 GameObject:
   m_ObjectHideFlags: 0
@@ -1078,8 +1080,8 @@ Transform:
   m_GameObject: {fileID: 6903553072435998306}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: 0.70637697, w: 0.70783585}
-  m_LocalPosition: {x: 0.678, y: -0.009, z: -0.0723}
-  m_LocalScale: {x: 0.37552106, y: 0.3755211, z: 0.37552106}
+  m_LocalPosition: {x: 0.6479, y: -0.0167, z: -0.0723}
+  m_LocalScale: {x: 0.06413509, y: 0.06413509, z: 0.06413509}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 5839514873938549958}
