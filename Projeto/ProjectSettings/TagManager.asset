@@ -5,6 +5,10 @@ TagManager:
   serializedVersion: 3
   tags:
   - Inimigo
+  - Boss
+  - PlayerBullet
+  - EnemyBullet
+  - Parede
   layers:
   - Default
   - TransparentFX

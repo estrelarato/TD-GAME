@@ -15,10 +15,9 @@ public class Chama : MonoBehaviour
     {
         if (collision.CompareTag("Player"))
         {
-            PlayerHealth ph = collision.GetComponent<PlayerHealth>();
-
-            if (ph != null)
-                ph.TakeDamage(damage);
+            Player p = collision.GetComponent<Player>();
+            if (p != null)
+                p.LevarDano(damage);
 
             if (destroyOnHit)
                 Destroy(gameObject);

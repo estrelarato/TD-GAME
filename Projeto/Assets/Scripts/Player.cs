@@ -23,10 +23,7 @@ public class Player : MonoBehaviour
 
     void Update()
     {
-        float moveX = Input.GetAxisRaw("Horizontal");
-        float moveY = Input.GetAxisRaw("Vertical");
-        direcao = new Vector2(moveX, moveY).normalized;
-        AtualizarHUD();
+        direcao = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical")).normalized;
     }
 
     void FixedUpdate()
@@ -37,20 +34,17 @@ public class Player : MonoBehaviour
     public void LevarDano(int dano)
     {
         vidaAtual -= dano;
+        AtualizarHUD();
+
         if (vidaAtual <= 0)
         {
             vidaAtual = 0;
-            AtualizarHUD();
             Morrer();
-            return;
         }
-
-        AtualizarHUD();
     }
 
     void Morrer()
     {
-        // Aqui você pode adicionar animação ou efeitos antes de destruir
         Destroy(gameObject);
     }
 
@@ -62,10 +56,10 @@ public class Player : MonoBehaviour
 
     void AtualizarHUD()
     {
-        if (barraVidaUI != null)
+        if (barraVidaUI)
             barraVidaUI.value = (float)vidaAtual / vidaMaxima;
 
-        if (textoPontuacao != null)
+        if (textoPontuacao)
             textoPontuacao.text = $"{pontuacao}";
     }
 }

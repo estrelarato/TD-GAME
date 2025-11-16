@@ -10,11 +10,14 @@ public class Bala : MonoBehaviour
         Destroy(gameObject, tempoDeVida);
     }
 
-    void OnTriggerEnter2D(Collider2D outro)
+    private void OnTriggerEnter2D(Collider2D other)
     {
-        if (outro.CompareTag("Inimigo"))
+        if (other.CompareTag("Boss"))
         {
-            outro.GetComponent<Inimigo>().LevarDano(dano);
+            BossController boss = other.GetComponent<BossController>();
+            if (boss != null)
+                boss.ReceberDano(dano);
+
             Destroy(gameObject);
         }
     }

@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 2736191043026211008}
   - component: {fileID: 2934678291161243661}
   - component: {fileID: 1195498947045239287}
-  - component: {fileID: 3111073757374081913}
+  - component: {fileID: 6014796192125596711}
   m_Layer: 0
   m_Name: "Carapa\xE7a"
   m_TagString: Inimigo
@@ -66,7 +66,7 @@ CircleCollider2D:
   m_CallbackLayers:
     serializedVersion: 2
     m_Bits: 4294967295
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0
@@ -99,7 +99,7 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 4
---- !u!114 &3111073757374081913
+--- !u!114 &6014796192125596711
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -108,14 +108,19 @@ MonoBehaviour:
   m_GameObject: {fileID: 3109390175706556513}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: cf8b6462d394a7940b22447849f9806f, type: 3}
+  m_Script: {fileID: 11500000, guid: df398b7475efb1344904784aa8f84266, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   velocidade: 2
-  vidaMaxima: 5
-  vidaAtual: 5
-  dano: 4
-  pontosAoMorrer: 30
+  vidaMaxima: 4
+  vidaAtual: 14
+  dano: 1
+  pontosAoMorrer: 15
+  projetilPrefab: {fileID: 8799302510933810030, guid: e289a6c18b481a341ae3e42b09b2cd17, type: 3}
+  pontoDisparo: {fileID: 7248119311670860581}
+  distanciaMinima: 6
+  distanciaMaxima: 12
+  tempoEntreTiros: 1.2
   barraVida: {fileID: 8307645372864418925}
   corpo: {fileID: 1096448035676452192}
 --- !u!1 &3472260282128711804
@@ -268,6 +273,37 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
+--- !u!1 &4171032378735672199
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 7248119311670860581}
+  m_Layer: 0
+  m_Name: "sa\xEDda"
+  m_TagString: Untagged
+  m_Icon: {fileID: -5938655980376293919, guid: 0000000000000000d000000000000000, type: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &7248119311670860581
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4171032378735672199}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0.006975315, y: 0.43945312, z: 0.5278815}
+  m_LocalScale: {x: 0.69754463, y: 0.69754463, z: 0.69754463}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1096448035676452192}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &4696220228042794434
 GameObject:
   m_ObjectHideFlags: 0
@@ -560,7 +596,8 @@ Transform:
   m_LocalPosition: {x: -0.56, y: -0.95, z: -0.7567709}
   m_LocalScale: {x: 1.4336, y: 1.4336, z: 1.4336}
   m_ConstrainProportionsScale: 0
-  m_Children: []
+  m_Children:
+  - {fileID: 7248119311670860581}
   m_Father: {fileID: 2736191043026211008}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &7122548849648366261

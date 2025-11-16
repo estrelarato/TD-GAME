@@ -29,7 +29,16 @@ public class BossController : MonoBehaviour
     public float quantidadeProjetilDireto = 5;
     public float velocidadeProjetil = 6f;
 
+    [Header("Feedback de dano")]
+    public float flashDuration = 0.25f;
+    public int flashPulses = 2;
+    public Color flashColor = Color.red;
+
     private bool podeAgir = true;
+
+    private SpriteRenderer[] spriteRenderers;
+    private Color[] originalColors;
+    private Coroutine flashCoroutine;
 
     void Start()
     {
@@ -37,12 +46,16 @@ public class BossController : MonoBehaviour
         vidaAtual = vidaMaxima;
         estadoAtual = EstadoDoBoss.Parado;
 
-        // Ajustando slider de vida
         if (sliderVida != null)
         {
             sliderVida.maxValue = vidaMaxima;
             sliderVida.value = vidaAtual;
         }
+
+        spriteRenderers = GetComponentsInChildren<SpriteRenderer>(true);
+        originalColors = new Color[spriteRenderers.Length];
+        for (int i = 0; i < spriteRenderers.Length; i++)
+            originalColors[i] = spriteRenderers[i].color;
 
         StartCoroutine(MaquinaDeEstados());
     }
@@ -51,7 +64,7 @@ public class BossController : MonoBehaviour
     {
         while (vidaAtual > 0)
         {
-            if (!podeAgir) yield return null;
+            if (!podeAgir) { yield return null; continue; }
 
             int acao = Random.Range(0, 3);
 
@@ -150,9 +163,13 @@ public class BossController : MonoBehaviour
     {
         GameObject projetil = Instantiate(projetilPrefab, transform.position, Quaternion.identity);
         Rigidbody2D rbProjetil = projetil.GetComponent<Rigidbody2D>();
-        rbProjetil.linearVelocity = direcao * velocidadeProjetil;
+        if (rbProjetil != null)
+            rbProjetil.linearVelocity = direcao * velocidadeProjetil;
     }
 
+    // =====================================================================
+    // RECEBER DANO + FLASH CORRIGIDO = NÃO TRAVA VERMELHO
+    // =====================================================================
     public void ReceberDano(float quantidade)
     {
         vidaAtual -= quantidade;
@@ -160,10 +177,40 @@ public class BossController : MonoBehaviour
         if (sliderVida != null)
             sliderVida.value = vidaAtual;
 
+        if (flashCoroutine != null)
+            StopCoroutine(flashCoroutine);
+
+        flashCoroutine = StartCoroutine(FlashDamage());
+
         if (vidaAtual <= 0)
             Morrer();
     }
 
+    private IEnumerator FlashDamage()
+    {
+        float singlePulse = flashDuration / (flashPulses * 2);
+
+        for (int p = 0; p < flashPulses; p++)
+        {
+            // vermelho
+            for (int i = 0; i < spriteRenderers.Length; i++)
+                spriteRenderers[i].color = flashColor;
+            yield return new WaitForSeconds(singlePulse);
+
+            // original
+            for (int i = 0; i < spriteRenderers.Length; i++)
+                spriteRenderers[i].color = originalColors[i];
+            yield return new WaitForSeconds(singlePulse);
+        }
+
+        // segurança absoluta
+        for (int i = 0; i < spriteRenderers.Length; i++)
+            spriteRenderers[i].color = originalColors[i];
+
+        flashCoroutine = null;
+    }
+
+    // =====================================================================
     void Morrer()
     {
         StopAllCoroutines();
@@ -171,5 +218,15 @@ public class BossController : MonoBehaviour
             sliderVida.gameObject.SetActive(false);
 
         Destroy(gameObject);
+    }
+
+    private void OnCollisionEnter2D(Collision2D colisao)
+    {
+        if (colisao.collider.CompareTag("Player"))
+        {
+            Player p = colisao.collider.GetComponent<Player>();
+            if (p != null)
+                p.LevarDano((int)danoDoBoss);
+        }
     }
 }

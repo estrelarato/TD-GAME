@@ -6,7 +6,7 @@ public class Inimigo : MonoBehaviour
     public float velocidade = 2f;
     public int vidaMaxima = 50;
     public int vidaAtual;
-    public int dano = 10; // Dano ajustável pelo Inspector
+    public int dano = 10;
     public int pontosAoMorrer = 10;
 
     public Slider barraVida;
@@ -38,13 +38,13 @@ public class Inimigo : MonoBehaviour
 
     void OnTriggerEnter2D(Collider2D outro)
     {
+        // 👇 Mantém o sistema original: encostou no player, causa dano e morre
         if (outro.CompareTag("Player"))
         {
             Player p = outro.GetComponent<Player>();
             if (p != null)
                 p.LevarDano(dano);
 
-            // 🧨 Faz o inimigo morrer ao causar o primeiro dano
             if (player != null)
             {
                 Player playerScript = player.GetComponent<Player>();
@@ -54,8 +54,17 @@ public class Inimigo : MonoBehaviour
 
             Destroy(gameObject);
         }
-    }
 
+        // 👇 Novo: agora o inimigo também recebe dano da bala
+        if (outro.CompareTag("PlayerBullet"))
+        {
+            Bala bala = outro.GetComponent<Bala>();
+            if (bala != null)
+                LevarDano(bala.dano);
+
+            Destroy(outro.gameObject);
+        }
+    }
 
     public void LevarDano(int danoRecebido)
     {
@@ -64,6 +73,7 @@ public class Inimigo : MonoBehaviour
         if (vidaAtual <= 0)
         {
             vidaAtual = 0;
+
             if (player != null)
             {
                 Player p = player.GetComponent<Player>();
