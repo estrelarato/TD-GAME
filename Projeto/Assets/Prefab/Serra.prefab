@@ -166,6 +166,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   velocidade: 5
-  tempoDeVida: 2
-  dano: 1
+  tempoDeVida: 5
+  dano: 10
   velocidadeRotacao: 360

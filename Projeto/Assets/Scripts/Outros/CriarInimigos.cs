@@ -2,9 +2,11 @@ using UnityEngine;
 
 public class Criarinimigos : MonoBehaviour
 {
-    public GameObject[] tiposDeInimigos; // arraste 3 prefabs diferentes
-    public Transform[] pontosDeSpawn;    // posições específicas no mapa
+    public GameObject[] tiposDeInimigos;
+    public Transform[] pontosDeSpawn;
     public float intervalo = 3f;
+
+    private bool spawnAtivo = true;
 
     void Start()
     {
@@ -13,6 +15,12 @@ public class Criarinimigos : MonoBehaviour
 
     void GerarInimigo()
     {
+        if (!spawnAtivo || GameManager.instance.bossSpawnado)
+        {
+            PararSpawn();
+            return;
+        }
+
         if (pontosDeSpawn.Length == 0 || tiposDeInimigos.Length == 0)
             return;
 
@@ -20,5 +28,11 @@ public class Criarinimigos : MonoBehaviour
         GameObject prefab = tiposDeInimigos[Random.Range(0, tiposDeInimigos.Length)];
 
         Instantiate(prefab, ponto.position, Quaternion.identity);
+    }
+
+    public void PararSpawn()
+    {
+        spawnAtivo = false;
+        CancelInvoke(nameof(GerarInimigo));
     }
 }

@@ -121,9 +121,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   velocidade: 6
-  vidaMaxima: 2
-  vidaAtual: 2
-  dano: 1
+  vidaMaxima: 20
+  vidaAtual: 20
+  dano: 10
   pontosAoMorrer: 5
   barraVida: {fileID: 1282357777655813162}
   corpo: {fileID: 611693474837176498}

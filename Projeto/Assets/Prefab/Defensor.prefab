@@ -111,9 +111,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3354414144670792379}
-  - component: {fileID: 8026379136665112838}
   - component: {fileID: 5113595153484699768}
   - component: {fileID: 891786576769100865}
+  - component: {fileID: 6521708296726445087}
   m_Layer: 0
   m_Name: Defensor
   m_TagString: Inimigo
@@ -138,25 +138,6 @@ Transform:
   - {fileID: 790512420925027613}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &8026379136665112838
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 281028522534419073}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: cf8b6462d394a7940b22447849f9806f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  velocidade: 4
-  vidaMaxima: 3
-  vidaAtual: 3
-  dano: 2
-  pontosAoMorrer: 10
-  barraVida: {fileID: 4533615907489079768}
-  corpo: {fileID: 790512420925027613}
 --- !u!50 &5113595153484699768
 Rigidbody2D:
   serializedVersion: 5
@@ -220,6 +201,29 @@ CircleCollider2D:
   m_CompositeOrder: 0
   m_Offset: {x: 0, y: 0}
   m_Radius: 0.5
+--- !u!114 &6521708296726445087
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 281028522534419073}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4d80f19b163a8824dbe162640932121c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  velocidade: 4
+  forcaDash: 30
+  vidaMaxima: 30
+  vidaAtual: 30
+  dano: 15
+  pontosAoMorrer: 20
+  distanciaDash: 20
+  tempoPreparacao: 0.25
+  tempoVulneravel: 0.25
+  barraVida: {fileID: 4533615907489079768}
+  corpo: {fileID: 790512420925027613}
 --- !u!1 &501248056914906955
 GameObject:
   m_ObjectHideFlags: 0

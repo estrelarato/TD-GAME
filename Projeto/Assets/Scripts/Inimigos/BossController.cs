@@ -35,7 +35,6 @@ public class BossController : MonoBehaviour
     public Color flashColor = Color.red;
 
     private bool podeAgir = true;
-
     private SpriteRenderer[] spriteRenderers;
     private Color[] originalColors;
     private Coroutine flashCoroutine;
@@ -52,6 +51,7 @@ public class BossController : MonoBehaviour
             sliderVida.value = vidaAtual;
         }
 
+        // Captura sprites para flash
         spriteRenderers = GetComponentsInChildren<SpriteRenderer>(true);
         originalColors = new Color[spriteRenderers.Length];
         for (int i = 0; i < spriteRenderers.Length; i++)
@@ -60,11 +60,21 @@ public class BossController : MonoBehaviour
         StartCoroutine(MaquinaDeEstados());
     }
 
+    void Update()
+    {
+        // Se o jogador ainda não existir, tenta encontrá-lo (suporte a spawn tardio)
+        if (jogador == null)
+        {
+            GameObject p = GameObject.FindGameObjectWithTag("Player");
+            if (p != null) jogador = p.transform;
+        }
+    }
+
     IEnumerator MaquinaDeEstados()
     {
         while (vidaAtual > 0)
         {
-            if (!podeAgir) { yield return null; continue; }
+            if (jogador == null || !podeAgir) { yield return null; continue; }
 
             int acao = Random.Range(0, 3);
 
@@ -88,11 +98,10 @@ public class BossController : MonoBehaviour
         estadoAtual = EstadoDoBoss.Perseguindo;
         float tempoPerseguindo = Random.Range(1.5f, 3.5f);
 
-        while (tempoPerseguindo > 0f)
+        while (tempoPerseguindo > 0f && jogador != null)
         {
             Vector2 direcao = (jogador.position - transform.position).normalized;
             rb.linearVelocity = direcao * velocidadeMovimento;
-
             tempoPerseguindo -= Time.deltaTime;
             yield return null;
         }
@@ -105,15 +114,16 @@ public class BossController : MonoBehaviour
         estadoAtual = EstadoDoBoss.PreparandoDash;
         rb.linearVelocity = Vector2.zero;
 
-        Vector2 direcaoDash = (jogador.position - transform.position).normalized;
-
         yield return new WaitForSeconds(tempoDePreparacaoDoDash);
 
-        estadoAtual = EstadoDoBoss.Dash;
-        rb.linearVelocity = direcaoDash * forcaDoDash;
+        if (jogador != null)
+        {
+            estadoAtual = EstadoDoBoss.Dash;
+            Vector2 direcaoDash = (jogador.position - transform.position).normalized;
+            rb.linearVelocity = direcaoDash * forcaDoDash;
+        }
 
         yield return new WaitForSeconds(0.35f);
-
         rb.linearVelocity = Vector2.zero;
         yield return new WaitForSeconds(tempoEntreDash);
     }
@@ -139,7 +149,6 @@ public class BossController : MonoBehaviour
         {
             float angulo = i * (360f / quantidadeProjetilArea);
             Vector2 direcao = new Vector2(Mathf.Cos(angulo * Mathf.Deg2Rad), Mathf.Sin(angulo * Mathf.Deg2Rad));
-
             DispararProjetil(direcao);
         }
 
@@ -153,6 +162,7 @@ public class BossController : MonoBehaviour
 
         for (int i = 0; i < quantidadeProjetilDireto; i++)
         {
+            if (jogador == null) break;
             Vector2 direcao = (jogador.position - transform.position).normalized;
             DispararProjetil(direcao);
             yield return new WaitForSeconds(0.2f);
@@ -167,9 +177,8 @@ public class BossController : MonoBehaviour
             rbProjetil.linearVelocity = direcao * velocidadeProjetil;
     }
 
-    // =====================================================================
-    // RECEBER DANO + FLASH CORRIGIDO = NÃO TRAVA VERMELHO
-    // =====================================================================
+    // ----------------------------- RECEBER DANO --------------------------------
+
     public void ReceberDano(float quantidade)
     {
         vidaAtual -= quantidade;
@@ -195,22 +204,25 @@ public class BossController : MonoBehaviour
             // vermelho
             for (int i = 0; i < spriteRenderers.Length; i++)
                 spriteRenderers[i].color = flashColor;
+
             yield return new WaitForSeconds(singlePulse);
 
-            // original
+            // retorna
             for (int i = 0; i < spriteRenderers.Length; i++)
                 spriteRenderers[i].color = originalColors[i];
+
             yield return new WaitForSeconds(singlePulse);
         }
 
-        // segurança absoluta
+        // segurança
         for (int i = 0; i < spriteRenderers.Length; i++)
             spriteRenderers[i].color = originalColors[i];
 
         flashCoroutine = null;
     }
 
-    // =====================================================================
+    // ----------------------------- MORTE --------------------------------
+
     void Morrer()
     {
         StopAllCoroutines();
@@ -220,11 +232,13 @@ public class BossController : MonoBehaviour
         Destroy(gameObject);
     }
 
-    private void OnCollisionEnter2D(Collision2D colisao)
+    // ----------------------------- DANO POR CONTATO --------------------------------
+
+    private void OnTriggerEnter2D(Collider2D colisao)
     {
-        if (colisao.collider.CompareTag("Player"))
+        if (colisao.CompareTag("Player"))
         {
-            Player p = colisao.collider.GetComponent<Player>();
+            Player p = colisao.GetComponent<Player>();
             if (p != null)
                 p.LevarDano((int)danoDoBoss);
         }

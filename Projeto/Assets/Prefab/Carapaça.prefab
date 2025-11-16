@@ -111,10 +111,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: df398b7475efb1344904784aa8f84266, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  velocidade: 2
-  vidaMaxima: 4
-  vidaAtual: 14
-  dano: 1
+  velocidade: 3
+  vidaMaxima: 40
+  vidaAtual: 40
+  dano: 10
   pontosAoMorrer: 15
   projetilPrefab: {fileID: 8799302510933810030, guid: e289a6c18b481a341ae3e42b09b2cd17, type: 3}
   pontoDisparo: {fileID: 7248119311670860581}
