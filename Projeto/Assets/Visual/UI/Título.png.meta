@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: d7b63e30bbbf4754fa6623ca995b8398
+guid: 3a08fc47ac515b6438b004eeb5a38640
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 967854597677045087
-    second: NailmasterSheo_0
+      213: 6201016521959332705
+    second: "T\xEDtulo_0"
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -37,7 +37,7 @@ TextureImporter:
   maxTextureSize: 2048
   textureSettings:
     serializedVersion: 2
-    filterMode: 0
+    filterMode: 1
     aniso: 1
     mipBias: 0
     wrapU: 1
@@ -100,13 +100,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: NailmasterSheo_0
+      name: "T\xEDtulo_0"
       rect:
         serializedVersion: 2
         x: 0
         y: 0
-        width: 92
-        height: 82
+        width: 1964
+        height: 1062
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -115,8 +115,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: f55d4c0f0a28e6d00800000000000000
-      internalID: 967854597677045087
+      spriteID: 16bd6bd1caf6e0650800000000000000
+      internalID: 6201016521959332705
       vertices: []
       indices: 
       edges: []
@@ -134,8 +134,7 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable:
-      NailmasterSheo_0: 967854597677045087
+    nameFileIdTable: {}
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
