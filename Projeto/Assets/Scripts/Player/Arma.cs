@@ -8,8 +8,12 @@ public class Arma : MonoBehaviour
     public float velocidadeBala = 10f;
 
     // Balanço visual
-    public float intensidadeBalanço = 20f; // quanto a arma balança ao clicar
-    public float duracaoBalanço = 0.1f; // duração do movimento de balanço
+    public float intensidadeBalanço = 20f;
+    public float duracaoBalanço = 0.1f;
+
+    // Áudio
+    public AudioClip somDoTiro;       // Coloque o AudioClip no inspector
+    private AudioSource audioSource;   // Componente para tocar o som
 
     private float tempoDeDisparo;
     private Camera cam;
@@ -21,6 +25,11 @@ public class Arma : MonoBehaviour
     void Start()
     {
         cam = Camera.main;
+
+        // Adiciona AudioSource se não houver
+        audioSource = GetComponent<AudioSource>();
+        if (audioSource == null)
+            audioSource = gameObject.AddComponent<AudioSource>();
     }
 
     void Update()
@@ -39,6 +48,10 @@ public class Arma : MonoBehaviour
             GameObject bala = Instantiate(balaPrefab, saidaDoTiro.position, saidaDoTiro.rotation);
             bala.GetComponent<Rigidbody2D>().linearVelocity = saidaDoTiro.right * velocidadeBala;
 
+            // Toca o som do tiro
+            if (somDoTiro != null)
+                audioSource.PlayOneShot(somDoTiro);
+
             // Ativa o balanço
             balancoAtivo = true;
             tempoBalanço = 0f;
@@ -52,14 +65,11 @@ public class Arma : MonoBehaviour
         {
             tempoBalanço += Time.deltaTime;
             float proporcao = tempoBalanço / duracaoBalanço;
-            // Movimenta a arma com uma função senoidal para suavidade
             float offsetBalanço = Mathf.Sin(proporcao * Mathf.PI) * intensidadeBalanço;
             anguloAtual += offsetBalanço;
 
             if (tempoBalanço >= duracaoBalanço)
-            {
-                balancoAtivo = false; // finaliza o balanço
-            }
+                balancoAtivo = false;
         }
 
         transform.rotation = Quaternion.Euler(0, 0, anguloAtual);
