@@ -431,7 +431,7 @@ MonoBehaviour:
   sliderVida: {fileID: 6665799102541132067}
   vidaMaxima: 800
   danoDoBoss: 30
-  velocidadeMovimento: 5
+  velocidadeMovimento: 9
   forcaDoDash: 40
   tempoDePreparacaoDoDash: 0.5
   tempoEntreDash: 1

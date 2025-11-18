@@ -30,8 +30,15 @@ public class GameManager : MonoBehaviour
             Criarinimigos[] spawners = FindObjectsOfType<Criarinimigos>();
             foreach (var s in spawners)
                 s.PararSpawn();
-                
+
+            // Spawn do boss
             Instantiate(bossPrefab, localSpawnBoss.position, Quaternion.identity);
+
+            // *** TROCA DE MÚSICA DO BOSS ***
+            if (AudioManager.instance != null)
+            {
+                AudioManager.instance.TrocarMusica(AudioManager.instance.musicaBoss);
+            }
         }
     }
 }

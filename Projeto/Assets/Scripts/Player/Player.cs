@@ -1,5 +1,7 @@
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
+using TMPro;
 
 public class Player : MonoBehaviour
 {
@@ -15,13 +17,15 @@ public class Player : MonoBehaviour
 
     [Header("UI")]
     public Slider barraVidaUI;
-    public TMPro.TextMeshProUGUI textoPontuacao;
+    public TextMeshProUGUI textoPontuacao;
+    public Image fadeImage; // Imagem do fade (UI)
 
     private Rigidbody2D rb;
     private Vector2 direcao;
 
     private SpriteRenderer spriteRenderer;
     private Color corOriginal;
+    private bool morto = false;
 
     void Start()
     {
@@ -33,11 +37,21 @@ public class Player : MonoBehaviour
         if (spriteRenderer != null)
             corOriginal = spriteRenderer.color;
 
+        // Zera o alpha do fade ao iniciar
+        if (fadeImage != null)
+        {
+            Color c = fadeImage.color;
+            c.a = 0f;
+            fadeImage.color = c;
+        }
+
         AtualizarHUD();
     }
 
     void Update()
     {
+        if (morto) return; // Bloqueia movimento após morte
+
         float moveX = Input.GetAxisRaw("Horizontal");
         float moveY = Input.GetAxisRaw("Vertical");
         direcao = new Vector2(moveX, moveY).normalized;
@@ -47,17 +61,19 @@ public class Player : MonoBehaviour
 
     void FixedUpdate()
     {
-        rb.MovePosition(rb.position + direcao * velocidade * Time.fixedDeltaTime);
+        if (!morto)
+            rb.MovePosition(rb.position + direcao * velocidade * Time.fixedDeltaTime);
     }
 
-    // =============================================
-    // DANO + INVENCIBILIDADE + PISCAR
-    // =============================================
+    // ------------------------------------
+    // DANO + INVENCIBILIDADE + HIT FLASH
+    // ------------------------------------
     public void LevarDano(int dano)
     {
-        if (invencivel) return;
+        if (invencivel || morto) return;
 
         vidaAtual -= dano;
+
         if (vidaAtual <= 0)
         {
             vidaAtual = 0;
@@ -78,7 +94,7 @@ public class Player : MonoBehaviour
         while (tempo < tempoInvencivel)
         {
             if (spriteRenderer != null)
-                spriteRenderer.color = Color.white;  // efeito flash claro
+                spriteRenderer.color = Color.white;
 
             yield return new WaitForSeconds(0.1f);
 
@@ -96,21 +112,64 @@ public class Player : MonoBehaviour
             spriteRenderer.color = corOriginal;
     }
 
+    // ------------------------------------
+    // MORTE + FADE + BLOQUEIO DE CONTROLE
+    // ------------------------------------
     void Morrer()
     {
-        Destroy(gameObject);
+        if (morto) return;
+        morto = true;
+
+        // Desativa sprite (some da tela imediatamente)
+        if (spriteRenderer != null)
+            spriteRenderer.enabled = false;
+
+        // trava movimento
+        rb.linearVelocity = Vector2.zero;
+        rb.isKinematic = true;
+
+        StartCoroutine(FadeGameOver());
     }
 
+    private System.Collections.IEnumerator FadeGameOver()
+    {
+        float duracao = 0.4f;
+        float tempo = 0f;
+
+        while (tempo < duracao)
+        {
+            tempo += Time.deltaTime;
+            float alpha = Mathf.Lerp(0f, 1f, tempo / duracao);
+
+            if (fadeImage != null)
+            {
+                Color c = fadeImage.color;
+                c.a = alpha;
+                fadeImage.color = c;
+            }
+
+            yield return null;
+        }
+
+        // Carrega a cena após o fade
+        SceneManager.LoadScene("GameOver");
+    }
+
+    // ------------------------------------
+    // PONTUAÇÃO
+    // ------------------------------------
     public void AdicionarPontuacao(int pontos)
     {
         pontuacao += pontos;
         AtualizarHUD();
 
-
         if (GameManager.instance != null)
             GameManager.instance.VerificarBoss(pontuacao);
     }
 
+    // ------------------------------------
+    // HUD
+    // ------------------------------------
     void AtualizarHUD()
     {
         if (barraVidaUI != null)
@@ -120,14 +179,16 @@ public class Player : MonoBehaviour
             textoPontuacao.text = "" + pontuacao;
     }
 
+    // ------------------------------------
+    // CURA
+    // ------------------------------------
     public void Curar(int quantidade)
     {
         vidaAtual += quantidade;
 
         if (vidaAtual > vidaMaxima)
-        vidaAtual = vidaMaxima;
+            vidaAtual = vidaMaxima;
 
         AtualizarHUD();
     }
-
 }
