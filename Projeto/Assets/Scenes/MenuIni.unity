@@ -1463,7 +1463,7 @@ GameObject:
   - component: {fileID: 1446008486}
   - component: {fileID: 1446008485}
   - component: {fileID: 1446008484}
-  - component: {fileID: 1446008483}
+  - component: {fileID: 1446008487}
   m_Layer: 5
   m_Name: BSair
   m_TagString: Untagged
@@ -1491,19 +1491,6 @@ RectTransform:
   m_AnchoredPosition: {x: 441.8, y: -279}
   m_SizeDelta: {x: 65.41, y: 30}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &1446008483
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1446008481}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 45b9586ca2ae3a94298f7e3a99c2714d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  sceneName: Creditos
 --- !u!114 &1446008484
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1547,7 +1534,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1446008485}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1446008487}
+        m_TargetAssemblyTypeName: Sair, Assembly-CSharp
+        m_MethodName: CloseApplication
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1446008485
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1586,6 +1585,18 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1446008481}
   m_CullTransparentMesh: 1
+--- !u!114 &1446008487
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1446008481}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 95c9f1d65c8bcd546999c05123608545, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1790620192
 GameObject:
   m_ObjectHideFlags: 0
