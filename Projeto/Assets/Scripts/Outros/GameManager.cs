@@ -34,7 +34,7 @@ public class GameManager : MonoBehaviour
             // Spawn do boss
             Instantiate(bossPrefab, localSpawnBoss.position, Quaternion.identity);
 
-            // *** TROCA DE MÚSICA DO BOSS ***
+            // Troca de música do boss
             if (AudioManager.instance != null)
             {
                 AudioManager.instance.TrocarMusica(AudioManager.instance.musicaBoss);

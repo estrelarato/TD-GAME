@@ -1,6 +1,7 @@
 using System.Collections;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class BossController : MonoBehaviour
 {
@@ -62,7 +63,6 @@ public class BossController : MonoBehaviour
 
     void Update()
     {
-        // Se o jogador ainda não existir, tenta encontrá-lo (suporte a spawn tardio)
         if (jogador == null)
         {
             GameObject p = GameObject.FindGameObjectWithTag("Player");
@@ -83,9 +83,11 @@ public class BossController : MonoBehaviour
                 case 0:
                     yield return StartCoroutine(PerseguirJogador());
                     break;
+
                 case 1:
                     yield return StartCoroutine(AtaqueDash());
                     break;
+
                 case 2:
                     yield return StartCoroutine(AtaqueProjetil());
                     break;
@@ -96,13 +98,13 @@ public class BossController : MonoBehaviour
     IEnumerator PerseguirJogador()
     {
         estadoAtual = EstadoDoBoss.Perseguindo;
-        float tempoPerseguindo = Random.Range(1.5f, 3.5f);
+        float tempo = Random.Range(1.5f, 3.5f);
 
-        while (tempoPerseguindo > 0f && jogador != null)
+        while (tempo > 0f && jogador != null)
         {
-            Vector2 direcao = (jogador.position - transform.position).normalized;
-            rb.linearVelocity = direcao * velocidadeMovimento;
-            tempoPerseguindo -= Time.deltaTime;
+            Vector2 dir = (jogador.position - transform.position).normalized;
+            rb.linearVelocity = dir * velocidadeMovimento;
+            tempo -= Time.deltaTime;
             yield return null;
         }
 
@@ -119,8 +121,8 @@ public class BossController : MonoBehaviour
         if (jogador != null)
         {
             estadoAtual = EstadoDoBoss.Dash;
-            Vector2 direcaoDash = (jogador.position - transform.position).normalized;
-            rb.linearVelocity = direcaoDash * forcaDoDash;
+            Vector2 dir = (jogador.position - transform.position).normalized;
+            rb.linearVelocity = dir * forcaDoDash;
         }
 
         yield return new WaitForSeconds(0.35f);
@@ -148,8 +150,8 @@ public class BossController : MonoBehaviour
         for (int i = 0; i < quantidadeProjetilArea; i++)
         {
             float angulo = i * (360f / quantidadeProjetilArea);
-            Vector2 direcao = new Vector2(Mathf.Cos(angulo * Mathf.Deg2Rad), Mathf.Sin(angulo * Mathf.Deg2Rad));
-            DispararProjetil(direcao);
+            Vector2 dir = new Vector2(Mathf.Cos(angulo * Mathf.Deg2Rad), Mathf.Sin(angulo * Mathf.Deg2Rad));
+            DispararProjetil(dir);
         }
 
         yield return new WaitForSeconds(0.8f);
@@ -163,18 +165,21 @@ public class BossController : MonoBehaviour
         for (int i = 0; i < quantidadeProjetilDireto; i++)
         {
             if (jogador == null) break;
-            Vector2 direcao = (jogador.position - transform.position).normalized;
-            DispararProjetil(direcao);
+
+            Vector2 dir = (jogador.position - transform.position).normalized;
+            DispararProjetil(dir);
+
             yield return new WaitForSeconds(0.2f);
         }
     }
 
     void DispararProjetil(Vector2 direcao)
     {
-        GameObject projetil = Instantiate(projetilPrefab, transform.position, Quaternion.identity);
-        Rigidbody2D rbProjetil = projetil.GetComponent<Rigidbody2D>();
-        if (rbProjetil != null)
-            rbProjetil.linearVelocity = direcao * velocidadeProjetil;
+        GameObject proj = Instantiate(projetilPrefab, transform.position, Quaternion.identity);
+        Rigidbody2D rbProj = proj.GetComponent<Rigidbody2D>();
+
+        if (rbProj != null)
+            rbProj.linearVelocity = direcao * velocidadeProjetil;
     }
 
     // ----------------------------- RECEBER DANO --------------------------------
@@ -197,24 +202,21 @@ public class BossController : MonoBehaviour
 
     private IEnumerator FlashDamage()
     {
-        float singlePulse = flashDuration / (flashPulses * 2);
+        float single = flashDuration / (flashPulses * 2);
 
         for (int p = 0; p < flashPulses; p++)
         {
-            // vermelho
-            for (int i = 0; i < spriteRenderers.Length; i++)
-                spriteRenderers[i].color = flashColor;
+            foreach (var s in spriteRenderers)
+                s.color = flashColor;
 
-            yield return new WaitForSeconds(singlePulse);
+            yield return new WaitForSeconds(single);
 
-            // retorna
             for (int i = 0; i < spriteRenderers.Length; i++)
                 spriteRenderers[i].color = originalColors[i];
 
-            yield return new WaitForSeconds(singlePulse);
+            yield return new WaitForSeconds(single);
         }
 
-        // segurança
         for (int i = 0; i < spriteRenderers.Length; i++)
             spriteRenderers[i].color = originalColors[i];
 
@@ -226,8 +228,12 @@ public class BossController : MonoBehaviour
     void Morrer()
     {
         StopAllCoroutines();
+
         if (sliderVida != null)
             sliderVida.gameObject.SetActive(false);
+
+        // 🔥 TROCA PARA A CENA DE PARABÉNS
+        SceneManager.LoadScene("Final");
 
         Destroy(gameObject);
     }
