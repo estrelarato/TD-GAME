@@ -184,7 +184,10 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      "ferr\xE3oQ_0": -8771277543939592596
+      "ferr\xE3oQ_1": -3846880198904531838
+      "ferr\xE3oQ_2": -2997390087501431525
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
