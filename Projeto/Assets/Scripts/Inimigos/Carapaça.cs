@@ -3,14 +3,14 @@ using UnityEngine.UI;
 
 public class Carapaça : MonoBehaviour
 {
-    [Header("Atributos Gerais")]
+
     public float velocidade = 2f;
     public int vidaMaxima = 40;
     public int vidaAtual;
     public int dano = 10;
     public int pontosAoMorrer = 15;
 
-    [Header("Ataque")]
+
     public GameObject projetilPrefab;
     public Transform pontoDisparo;
     public float distanciaMinima = 3f;
@@ -18,7 +18,7 @@ public class Carapaça : MonoBehaviour
     public float tempoEntreTiros = 1.2f;
     private float timerTiro;
 
-    [Header("UI / Visual")]
+
     public Slider barraVida;
     public Transform corpo;
 
@@ -37,7 +37,7 @@ public class Carapaça : MonoBehaviour
         float distancia = Vector2.Distance(transform.position, player.position);
         Vector2 direcao = (player.position - transform.position).normalized;
 
-        // Movimento inteligente
+
         if (distancia > distanciaMaxima)
         {
             transform.position += (Vector3)direcao * velocidade * Time.deltaTime;
@@ -47,14 +47,14 @@ public class Carapaça : MonoBehaviour
             transform.position -= (Vector3)direcao * velocidade * Time.deltaTime;
         }
 
-        // Rotaciona para mirar
+
         if (corpo != null)
         {
             float angulo = Mathf.Atan2(direcao.y, direcao.x) * Mathf.Rad2Deg;
             corpo.rotation = Quaternion.Euler(0, 0, angulo - 90f);
         }
 
-        // Disparo
+
         timerTiro -= Time.deltaTime;
         if (distancia <= distanciaMaxima && distancia >= distanciaMinima && timerTiro <= 0f)
         {

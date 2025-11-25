@@ -2,10 +2,10 @@ using UnityEngine;
 
 public class Itemcura : MonoBehaviour
 {
-    [Header("Cura")]
+
     public int quantidadeCura = 20;
 
-    [Header("Pulsar (Scale Effect)")]
+
     public float pulseSpeed = 2f;
     public float pulseAmount = 0.1f;
     private Vector3 originalScale;
@@ -17,7 +17,7 @@ public class Itemcura : MonoBehaviour
 
     void Update()
     {
-        // Efeito de pulsar
+
         float scale = 1 + Mathf.Sin(Time.time * pulseSpeed) * pulseAmount;
         transform.localScale = originalScale * scale;
     }

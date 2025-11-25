@@ -6,20 +6,20 @@ public class AudioManager : MonoBehaviour
 {
     public static AudioManager instance;
 
-    [Header("Mixer Principal")]
+
     public AudioMixer audioMixer;
 
-    [Header("Audio Source Principal")]
+
     public AudioSource musicSource;
 
-    [Header("Clipes de Música")]
+
     public AudioClip musicaMenu;
     public AudioClip musicaJogo;
     public AudioClip musicaBoss;
 
     private void Awake()
     {
-        // Singleton
+
         if (instance == null)
         {
             instance = this;
@@ -44,7 +44,7 @@ public class AudioManager : MonoBehaviour
 
     private void Start()
     {
-        // Ajusta volumes ao iniciar baseado no que foi salvo
+
         float musicVol = PlayerPrefs.GetFloat("MusicVolume", 1f);
         float sfxVol   = PlayerPrefs.GetFloat("SFXVolume", 1f);
         float uiVol    = PlayerPrefs.GetFloat("UIVolume", 1f);
@@ -53,17 +53,17 @@ public class AudioManager : MonoBehaviour
         UpdateSFXVolume(sfxVol);
         UpdateUIVolume(uiVol);
 
-        // Começa com a música da cena atual
+
         TrocarMusicaDaCena(SceneManager.GetActiveScene().name);
     }
 
-    // Chamado sempre que uma cena é carregada
+
     private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
         TrocarMusicaDaCena(scene.name);
     }
 
-    // Decide qual música tocar dependendo do nome da cena
+
     public void TrocarMusicaDaCena(string sceneName)
     {
         if (sceneName.Contains("Menu"))
@@ -80,7 +80,7 @@ public class AudioManager : MonoBehaviour
         }
     }
 
-    // Troca de música simples (não reinicia se já estiver tocando)
+
     public void TrocarMusica(AudioClip novaMusica)
     {
         if (musicSource.clip == novaMusica && musicSource.isPlaying) return;
@@ -90,7 +90,7 @@ public class AudioManager : MonoBehaviour
         musicSource.Play();
     }
 
-    // Volumes
+
     public void UpdateMusicVolume(float value)
     {
         audioMixer.SetFloat("MusicVolume", Mathf.Log10(Mathf.Clamp(value, 0.001f, 1f)) * 20);

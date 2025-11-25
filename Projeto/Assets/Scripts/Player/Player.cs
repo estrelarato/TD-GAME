@@ -5,20 +5,20 @@ using TMPro;
 
 public class Player : MonoBehaviour
 {
-    [Header("Atributos")]
+
     public float velocidade = 5f;
     public int vidaMaxima = 100;
     public int vidaAtual;
     public int pontuacao;
 
-    [Header("Invencibilidade")]
+
     public float tempoInvencivel = 1.2f;
     private bool invencivel = false;
 
-    [Header("UI")]
+
     public Slider barraVidaUI;
     public TextMeshProUGUI textoPontuacao;
-    public Image fadeImage; // Imagem do fade (UI)
+    public Image fadeImage;
 
     private Rigidbody2D rb;
     private Vector2 direcao;
@@ -37,7 +37,7 @@ public class Player : MonoBehaviour
         if (spriteRenderer != null)
             corOriginal = spriteRenderer.color;
 
-        // Zera o alpha do fade ao iniciar
+
         if (fadeImage != null)
         {
             Color c = fadeImage.color;
@@ -50,7 +50,7 @@ public class Player : MonoBehaviour
 
     void Update()
     {
-        if (morto) return; // Bloqueia movimento após morte
+        if (morto) return;
 
         float moveX = Input.GetAxisRaw("Horizontal");
         float moveY = Input.GetAxisRaw("Vertical");
@@ -65,9 +65,7 @@ public class Player : MonoBehaviour
             rb.MovePosition(rb.position + direcao * velocidade * Time.fixedDeltaTime);
     }
 
-    // ------------------------------------
-    // DANO + INVENCIBILIDADE + HIT FLASH
-    // ------------------------------------
+
     public void LevarDano(int dano)
     {
         if (invencivel || morto) return;
@@ -112,19 +110,17 @@ public class Player : MonoBehaviour
             spriteRenderer.color = corOriginal;
     }
 
-    // ------------------------------------
-    // MORTE + FADE + BLOQUEIO DE CONTROLE
-    // ------------------------------------
+
     void Morrer()
     {
         if (morto) return;
         morto = true;
 
-        // Desativa sprite (some da tela imediatamente)
+
         if (spriteRenderer != null)
             spriteRenderer.enabled = false;
 
-        // trava movimento
+
         rb.linearVelocity = Vector2.zero;
         rb.isKinematic = true;
 
@@ -151,13 +147,11 @@ public class Player : MonoBehaviour
             yield return null;
         }
 
-        // Carrega a cena após o fade
+
         SceneManager.LoadScene("GameOver");
     }
 
-    // ------------------------------------
-    // PONTUAÇÃO
-    // ------------------------------------
+
     public void AdicionarPontuacao(int pontos)
     {
         pontuacao += pontos;
@@ -167,9 +161,7 @@ public class Player : MonoBehaviour
             GameManager.instance.VerificarBoss(pontuacao);
     }
 
-    // ------------------------------------
-    // HUD
-    // ------------------------------------
+
     void AtualizarHUD()
     {
         if (barraVidaUI != null)
@@ -179,9 +171,7 @@ public class Player : MonoBehaviour
             textoPontuacao.text = "" + pontuacao;
     }
 
-    // ------------------------------------
-    // CURA
-    // ------------------------------------
+
     public void Curar(int quantidade)
     {
         vidaAtual += quantidade;

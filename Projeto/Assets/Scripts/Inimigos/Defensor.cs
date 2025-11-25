@@ -4,7 +4,7 @@ using UnityEngine.UI;
 
 public class DashEnemy : MonoBehaviour
 {
-    [Header("Atributos")]
+
     public float velocidade = 2f;
     public float forcaDash = 10f;
     public int vidaMaxima = 20;
@@ -12,12 +12,12 @@ public class DashEnemy : MonoBehaviour
     public int dano = 20;
     public int pontosAoMorrer = 20;
 
-    [Header("Dash")]
+
     public float distanciaDash = 3f;          // Quando começa o dash
     public float tempoPreparacao = 0.4f;      // Tempo parado antes de dar dash
     public float tempoVulneravel = 0.7f;      // Tempo parado depois do dash
 
-    [Header("UI / Visual")]
+
     public Slider barraVida;
     public Transform corpo;
 
@@ -32,7 +32,7 @@ public class DashEnemy : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
         StartCoroutine(MaquinaDeEstados());
 
-        // Inicializa slider corretamente
+
         if (barraVida != null)
         {
             barraVida.maxValue = vidaMaxima;

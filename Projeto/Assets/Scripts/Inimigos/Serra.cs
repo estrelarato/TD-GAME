@@ -3,12 +3,12 @@ using UnityEngine;
 public class Serra : MonoBehaviour
 {
     [Header("Configuração do projétil")]
-    public float velocidade = 7f;        // Velocidade do projétil
-    public float tempoDeVida = 5f;       // Destruição automática
-    public int dano = 10;                // Dano que o projétil causa no player
+    public float velocidade = 7f;        
+    public float tempoDeVida = 5f;     
+    public int dano = 10;                
 
     [Header("Rotação")]
-    public float velocidadeRotacao = 360f; // Graus por segundo
+    public float velocidadeRotacao = 360f; 
 
     private Rigidbody2D rb;
 
@@ -16,7 +16,7 @@ public class Serra : MonoBehaviour
     {
         rb = GetComponent<Rigidbody2D>();
 
-        // Encontrar o player
+
         GameObject playerObj = GameObject.FindGameObjectWithTag("Player");
         if (playerObj != null)
         {
@@ -24,13 +24,13 @@ public class Serra : MonoBehaviour
             rb.linearVelocity = direcao * velocidade;
         }
 
-        // Destruir depois de tempoDeVida segundos
+
         Destroy(gameObject, tempoDeVida);
     }
 
     void Update()
     {
-        // Gira visualmente
+
         transform.Rotate(0f, 0f, velocidadeRotacao * Time.deltaTime);
     }
 
@@ -40,16 +40,16 @@ public class Serra : MonoBehaviour
         {
             Player p = outro.GetComponent<Player>();
             if (p != null)
-                p.LevarDano(dano); // usa o valor público definido no Inspector
+                p.LevarDano(dano);
 
             Destroy(gameObject);
         }
 
-        // Evita destruir em outros inimigos
+
         if (outro.CompareTag("Inimigo") || outro.CompareTag("EnemyBullet"))
             return;
 
-        // Destroi ao colidir com paredes ou outros obstáculos
+
         if (outro.CompareTag("Parede"))
             Destroy(gameObject);
     }

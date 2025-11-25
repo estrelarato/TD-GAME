@@ -38,7 +38,7 @@ public class Inimigo : MonoBehaviour
 
     void OnTriggerEnter2D(Collider2D outro)
     {
-        // 👇 Mantém o sistema original: encostou no player, causa dano e morre
+
         if (outro.CompareTag("Player"))
         {
             Player p = outro.GetComponent<Player>();
@@ -55,7 +55,7 @@ public class Inimigo : MonoBehaviour
             Destroy(gameObject);
         }
 
-        // 👇 Novo: agora o inimigo também recebe dano da bala
+
         if (outro.CompareTag("PlayerBullet"))
         {
             Bala bala = outro.GetComponent<Bala>();

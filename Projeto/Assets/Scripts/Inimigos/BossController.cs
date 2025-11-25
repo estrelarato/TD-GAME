@@ -8,29 +8,29 @@ public class BossController : MonoBehaviour
     public enum EstadoDoBoss { Parado, Perseguindo, PreparandoDash, Dash, AtirandoArea, AtirandoDireto }
     private EstadoDoBoss estadoAtual;
 
-    [Header("Referências")]
+
     public Transform jogador;
     public Slider sliderVida;
     private Rigidbody2D rb;
 
-    [Header("Atributos")]
+
     public float vidaMaxima = 100f;
     private float vidaAtual;
     public float danoDoBoss = 10f;
 
-    [Header("Movimentação")]
+
     public float velocidadeMovimento = 2f;
     public float forcaDoDash = 12f;
     public float tempoDePreparacaoDoDash = 1f;
     public float tempoEntreDash = 2.5f;
 
-    [Header("Projeteis")]
+
     public GameObject projetilPrefab;
     public float quantidadeProjetilArea = 12;
     public float quantidadeProjetilDireto = 5;
     public float velocidadeProjetil = 6f;
 
-    [Header("Feedback de dano")]
+
     public float flashDuration = 0.25f;
     public int flashPulses = 2;
     public Color flashColor = Color.red;
@@ -52,7 +52,7 @@ public class BossController : MonoBehaviour
             sliderVida.value = vidaAtual;
         }
 
-        // Captura sprites para flash
+        
         spriteRenderers = GetComponentsInChildren<SpriteRenderer>(true);
         originalColors = new Color[spriteRenderers.Length];
         for (int i = 0; i < spriteRenderers.Length; i++)
@@ -182,7 +182,6 @@ public class BossController : MonoBehaviour
             rbProj.linearVelocity = direcao * velocidadeProjetil;
     }
 
-    // ----------------------------- RECEBER DANO --------------------------------
 
     public void ReceberDano(float quantidade)
     {
@@ -223,7 +222,6 @@ public class BossController : MonoBehaviour
         flashCoroutine = null;
     }
 
-    // ----------------------------- MORTE --------------------------------
 
     void Morrer()
     {
@@ -232,13 +230,12 @@ public class BossController : MonoBehaviour
         if (sliderVida != null)
             sliderVida.gameObject.SetActive(false);
 
-        // 🔥 TROCA PARA A CENA DE PARABÉNS
+
         SceneManager.LoadScene("Final");
 
         Destroy(gameObject);
     }
 
-    // ----------------------------- DANO POR CONTATO --------------------------------
 
     private void OnTriggerEnter2D(Collider2D colisao)
     {
