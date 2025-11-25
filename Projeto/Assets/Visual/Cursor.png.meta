@@ -1,16 +1,10 @@
 fileFormatVersion: 2
-guid: ec98ee1f78ab6694098cec77676a3408
+guid: 6a0b5fc15be70b543829479f03d42dc3
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 4301250902094961619
-    second: f5_0
-  - first:
-      213: 1129120566292575134
-    second: f5_1
-  - first:
-      213: -6238211075709394583
-    second: f5_2
+      213: -4750761433519615375
+    second: Cursor_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -132,13 +126,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: f5_0
+      name: Cursor_0
       rect:
         serializedVersion: 2
-        x: 0
-        y: 0
-        width: 100
-        height: 89
+        x: 8
+        y: 9
+        width: 123
+        height: 124
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -147,52 +141,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 3dbd23d08ec11bb30800000000000000
-      internalID: 4301250902094961619
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: f5_1
-      rect:
-        serializedVersion: 2
-        x: 22
-        y: 81
-        width: 23
-        height: 14
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: e93f4763c217baf00800000000000000
-      internalID: 1129120566292575134
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: f5_2
-      rect:
-        serializedVersion: 2
-        x: 6
-        y: 23
-        width: 6
-        height: 9
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: 9612f6ef31c6d69a0800000000000000
-      internalID: -6238211075709394583
+      spriteID: 172107695a7e11eb0800000000000000
+      internalID: -4750761433519615375
       vertices: []
       indices: 
       edges: []
@@ -210,10 +160,7 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable:
-      f5_0: 4301250902094961619
-      f5_1: 1129120566292575134
-      f5_2: -6238211075709394583
+    nameFileIdTable: {}
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
